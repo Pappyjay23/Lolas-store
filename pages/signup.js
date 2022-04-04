@@ -11,9 +11,10 @@ import * as Yup from "yup";
 
 const signUp = () => {
 	// Validation
-	let yup = require('yup');
+	let yup = require("yup");
 	const validate = Yup.object({
-		username: Yup.string().matches(/^\S*$/, 'There should be no space between username')
+		username: Yup.string()
+			.matches(/^\S*$/, "There should be no space between username")
 			.max(15, "Must be 15 characters or less")
 			.required("Username is required"),
 		email: Yup.string().email("Email is invalid").required("Email is required"),
@@ -49,7 +50,7 @@ const signUp = () => {
 							password2: "",
 						}}
 						validationSchema={validate}
-						onSubmit={(values) => {
+						onSubmit={(values, {resetForm}) => {
 							// Post Request Function
 							const axios = require("axios").default;
 							const sendSignUp = async () => {
@@ -58,13 +59,25 @@ const signUp = () => {
 										"https://losales.herokuapp.com/auth/registration/",
 										values
 									);
-									console.log(response)
+									if (response.status == 201) {
+										alert(
+											"Account successfully " +
+												response.statusText +
+												". You can now proceed to the login page."
+										);
+									}
 								} catch (error) {
-									console.error(error);
+									if (error.response.status == 400) {
+										alert(
+											error.response.data.email +
+												" " +
+												error.response.data.username
+										);
+									}
 								}
+							resetForm({values: ''})
 							};
 							sendSignUp();
-							console.log(values);
 						}}>
 						{(formik) => (
 							<div>

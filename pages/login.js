@@ -41,7 +41,7 @@ const login = () => {
 							password: "",
 						}}
 						validationSchema={validate}
-						onSubmit={(values) => {
+						onSubmit={(values, {resetForm}) => {
 							// Post Request Function
 							const axios = require("axios").default;
 							const sendLogin = async () => {
@@ -50,13 +50,21 @@ const login = () => {
 										"https://losales.herokuapp.com/auth/login/",
 										values
 									);
-									console.log(response)
+									if (response.status == 200) {
+										alert(
+											"Welcome back " +
+												values.username +
+												". You can now proceed to your dashboard."
+										);
+									}
 								} catch (error) {
-									console.error(error);
+									if (error.response.status == 400) {
+										alert(error.response.data.non_field_errors + " Please sign up if you haven't to be able to login.");
+									}
 								}
+							resetForm({values: ''})
 							};
 							sendLogin();
-							console.log(values);
 						}}>
 						{(formik) => (
 							<div>
