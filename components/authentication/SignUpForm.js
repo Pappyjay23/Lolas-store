@@ -21,13 +21,18 @@ const SignUpForm = () => {
 				<label htmlFor='text' className={"text-sm mb-2 font-semibold"}>
 					Username
 				</label>
-				<InputForm  name='username' type='text' id='text' placeholder='@Username' />
+				<InputForm
+					name='username'
+					type='text'
+					id='text'
+					placeholder='@Username'
+				/>
 			</div>
 			<div className='flex flex-col mb-4'>
 				<label htmlFor='email' className='text-sm mb-2 font-semibold'>
 					Email
 				</label>
-				<InputForm 
+				<InputForm
 					name='email'
 					type='email'
 					id='email'
@@ -40,13 +45,13 @@ const SignUpForm = () => {
 						Password
 					</label>
 					<div className='relative'>
-						<PasswordForm 
+						<PasswordForm
 							name='password1'
 							type={showPassword ? "text" : "password"}
 							id='password'
 							placeholder='Password'
-                            showPassword={showPassword}
-                            togglePassword={togglePassword}
+							showPassword={showPassword}
+							togglePassword={togglePassword}
 						/>
 					</div>
 				</div>
@@ -55,12 +60,13 @@ const SignUpForm = () => {
 						Confirm Password
 					</label>
 					<div className='relative'>
-						<CpasswordForm 
+						<CpasswordForm
 							name='password2'
 							type={showCPassword ? "text" : "password"}
 							id='cpassword'
-							placeholder='Confirm Password' showCPassword={showCPassword}
-                            toggleCPassword={toggleCPassword}
+							placeholder='Confirm Password'
+							showCPassword={showCPassword}
+							toggleCPassword={toggleCPassword}
 						/>
 					</div>
 				</div>
